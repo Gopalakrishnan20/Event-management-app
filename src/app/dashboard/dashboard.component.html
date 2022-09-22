@@ -1,0 +1,27 @@
+<div class="container mt-5">  
+    <h3 class="text-center">Employee Master List</h3>
+  <table class="table text-center table-hover mt-5">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of empList">
+        <td>{{emp.id}}</td>
+        <td>{{emp.first_name}}</td>
+        <td>{{emp.last_name}}</td>
+        <td>{{emp.email}}</td>
+        <td>
+          <button type="button" class="btn btn-link" (click)="editTodo(emp)">Edit</button>
+          <button type="button" class="btn btn-link" (click)="deleteTodo(emp.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-success" (click)="createTodo()">Create</button>
+</div>

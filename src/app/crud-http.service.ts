@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class CrudHttpService {
 
-  apiUrl: string = 'http://localhost:3000/todos';
+  apiUrl: string = 'http://localhost:3000/employees';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) { }
