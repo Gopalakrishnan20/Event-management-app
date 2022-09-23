@@ -12,4 +12,12 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  submit(form:any){
+    var userName = form.userName;
+    console.log(userName);
+  
+    var pass = form.pass;
+    console.log(pass);
+  }
+
 }
