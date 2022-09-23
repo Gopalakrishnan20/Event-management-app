@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudHttpService } from '../crud-http.service';
+import{FormBuilder,FormGroup} from'@angular/forms';
+import { EmployeeModel } from './employeeDashboard-Model';
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,56 +11,82 @@ import { CrudHttpService } from '../crud-http.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  
+  formValue!:FormGroup;
+  empModel:EmployeeModel=new EmployeeModel();
+  employeeData!:any;
 
   empList:any = [];
+showModel: any;
 
-  constructor(private crudHttpService: CrudHttpService){}
+  constructor(private crudHttpService: CrudHttpService,private formBuilder:FormBuilder){}
+
 
   ngOnInit(): void {
-    this.listEmployees();
+    this.getAllEmployeeDetails();
+    this.formValue=this.formBuilder.group({
+      id:[''],
+      firstname:[''],
+      lastname:[''],
+      email:['']
+    })    
   }
 
-  //to display all records
-  listEmployees(){
-    this.crudHttpService.list().subscribe((response)=>{
-      this.empList = response;
-    },(error=>{
+  postEmployeeDetails(){
+    this.empModel.id=this.formValue.value.id;
+    this.empModel.first_name=this.formValue.value.firstname;
+    this.empModel.last_name=this.formValue.value.lastname;
+    this.empModel.email=this.formValue.value.email;
 
-    }));
+    this.crudHttpService.postEmployee(this.empModel).subscribe(res=>{
+      console.log(res);
+      alert("Employee Added successfully");
+      this.formValue.reset();
+      let ref=document.getElementById('cancel')
+      ref?.click();
+      this.getAllEmployeeDetails();
+    },
+    err=>{
+      alert("Something Went Wrong")
+    })
+
   }
 
-  //create new record
-  createTodo(){
-    let todo = {
-      id: new Date().getTime(),
-      title:`Some Todo` 
-    }
-    this.crudHttpService.create(todo).subscribe((response)=>{
-      this.listEmployees();
-    },(error=>{
-
-    }));
+  getAllEmployeeDetails(){
+    this.crudHttpService.getEmployee().subscribe(res=>
+      {
+        this.formValue.reset();
+        this.employeeData=res;
+      })
   }
 
-  //modify record
-  editTodo(todo: any){
-    let data = {
-      id: new Date().getTime(),
-      title:`modify` 
-    }
-    this.crudHttpService.update(todo.id,data).subscribe((response)=>{
-      this.listEmployees();
-    },(error=>{
+  deleteEmployee(row:any){
+    this.crudHttpService.deleteEmployee(row.id).subscribe(res=>{
+      this.getAllEmployeeDetails();
+    })
 
-    }));
   }
 
-  //delete a record
-  deleteTodo(id: any){
-    this.crudHttpService.delete(id).subscribe((response)=>{
-      this.listEmployees();
-    },(error=>{
-    }));
+  onEdit(row:any){
+    this.empModel.id=row.id;
+    this.formValue.controls['id'].setValue(row.id);
+    this.formValue.controls['firstname'].setValue(row.first_name);
+    this.formValue.controls['lastname'].setValue(row.last_name);
+    this.formValue.controls['email'].setValue(row.email);
+
+  }
+  updateEmployeeDetails(){
+    this.empModel.id=this.formValue.value.id;
+    this.empModel.first_name=this.formValue.value.firstname;
+    this.empModel.last_name=this.formValue.value.lastname;
+    this.empModel.email=this.formValue.value.email;     
+    this.crudHttpService.updateEmployee(this.empModel,this.empModel.id).subscribe(res=>{
+      this.formValue.reset();
+      let ref=document.getElementById('cancel')
+      ref?.click();
+      this.getAllEmployeeDetails();
+    })  
+    
   }
 
 }

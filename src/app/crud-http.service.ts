@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/operators';
+import { map,catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 @Injectable({
@@ -13,34 +13,29 @@ export class CrudHttpService {
 
   constructor(private http: HttpClient) { }
 
-  // Create
-  create(data: any): Observable<any> {
-    let API_URL = `${this.apiUrl}`;
-    return this.http.post(API_URL, data)
-      .pipe(
-        catchError(this.handleError)
-      )
+  postEmployee(data:any){
+    return this.http.post<any>(this.apiUrl,data).pipe(map((res:any)=>{
+      return res;
+    }))
   }
 
-  // Read
-  list() {
-    return this.http.get(`${this.apiUrl}`);
+  getEmployee(){
+    return this.http.get<any>(this.apiUrl).pipe(map((res:any)=>{
+      return res;
+    }))
   }
 
-  // Update
-  update(id: any, data: any): Observable<any> {
-    let API_URL = `${this.apiUrl}/${id}`;
-    return this.http.put(API_URL, data, { headers: this.headers }).pipe(
-      catchError(this.handleError)
-    )
+  updateEmployee(data:any,id:number){
+    return this.http.put<any>(this.apiUrl+'/'+id,data).pipe(map((res:any)=>{
+      return res;
+    }))
   }
 
-  // Delete
-  delete(id: any): Observable<any> {
-    var API_URL = `${this.apiUrl}/${id}`;
-    return this.http.delete(API_URL).pipe(
-      catchError(this.handleError)
-    )
+  deleteEmployee(id:number){
+    return this.http.delete<any>(this.apiUrl+'/'+id).pipe(map((res:any)=>
+    {
+      return res;
+    }))
   }
 
   // Handle API errors

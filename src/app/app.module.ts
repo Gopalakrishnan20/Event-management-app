@@ -5,19 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { InputformComponent } from './inputform/inputform.component';
+import{ReactiveFormsModule} from'@angular/forms';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    DashboardComponent,
-    InputformComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
