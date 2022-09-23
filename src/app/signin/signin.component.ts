@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
@@ -7,17 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  submit(form:any){
-    var userName = form.userName;
-    console.log(userName);
-  
-    var pass = form.pass;
-    console.log(pass);
-  }
-
+ngOnInit() {}
 }

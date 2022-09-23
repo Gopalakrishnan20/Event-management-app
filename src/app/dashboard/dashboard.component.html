@@ -1,8 +1,10 @@
-<nav class="navbar navbar-light bg-primary">
+<nav class="navbar bg-primary">
     <div class="container-fluid">
         <h3 class="text-white">Employee Master List</h3>
         <div class="d-flex">
             <button class="btn btn-success" (click)="showModel=true">Add Employee</button>
+            <form action="signin"><button type="submit" class="mx-3 btn btn-warning">Logout</button></form>
+            <button class="btn btn-sm btn-outline-dark" (click)="showPassModel=true">Change Password</button> 
         </div>
     </div>
 </nav>
@@ -69,6 +71,41 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showModel=false">Close</button>
           <button type="submit" class="btn btn-primary"(click)="postEmployeeDetails()" >Add</button>
           <button type="submit" class="btn btn-primary"(click)="updateEmployeeDetails()" >Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngClass]="{'show':showPassModel}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="showPassModel=false">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <div class="form-group row">
+              <label for="staticEmail" class="col-sm-5 col-form-label">Current Password</label>
+              <div class="col-sm-5">
+                <input type="password" class="form-control" id="staticEmail" placeholder="Password">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-5 col-form-label">New Password</label>
+              <div class="col-sm-5">
+                <input type="password" class="form-control" id="inputPassword" placeholder="lkdes@#%12SD">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="showPassModel=false">Close</button>
+          <button (click)="changePass()" type="button" class="btn btn-primary">Update Password</button>
         </div>
       </div>
     </div>

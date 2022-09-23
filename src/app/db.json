@@ -13,12 +13,6 @@
       "email": "steve@codingthesmartway.com"
     },
     {
-      "id": 3,
-      "first_name": "Ann",
-      "last_name": "Smith",
-      "email": "ann@codingthesmartway.com"
-    },
-    {
       "id": 5,
       "first_name": "Michel",
       "last_name": "Scott",
@@ -27,8 +21,14 @@
     {
       "id": 6,
       "first_name": "jim",
-      "last_name": "beasly",
+      "last_name": "Halpert",
       "email": "abc@dunder.com"
+    },
+    {
+      "id": 7,
+      "first_name": "Chandler",
+      "last_name": "Bing",
+      "email": "qwerty@abc.com"
     }
   ]
 }

@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
 
   empList:any = [];
 showModel: any;
+showPassModel:any;
 
   constructor(private crudHttpService: CrudHttpService,private formBuilder:FormBuilder){}
 
@@ -87,6 +88,9 @@ showModel: any;
       this.getAllEmployeeDetails();
     })  
     
+  }
+  changePass(){
+    alert("Password Updated Successfully");
   }
 
 }
